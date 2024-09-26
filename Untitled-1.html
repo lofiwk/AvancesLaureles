@@ -15,12 +15,15 @@
                 <li><a href="#properties">Propiedades</a></li>
                 <li><a href="#about">Sobre Nosotros</a></li>
                 <li><a href="#contact">Contacto</a></li>
+                <li><a href="#" id="open-zoom-modal">Agendar Cita</a></li>
             </ul>
         </nav>
     </header>
 
     <div class="hero">
-        <h1>Descubre tu Inversión Ideal en el Campo de Limache</h1>
+        <h1>Propiedades Rurales Limache</h1>
+        <p>INVERSIONES RURALES DISEÑADAS PARA TU FUTURO</p>
+        <button id="hero-cta" class="cta-button">AGENDAR CITA</button>
     </div>
 
     <div class="container">
@@ -33,7 +36,7 @@
 
         <section id="about">
             <h2>Sobre Nosotros</h2>
-            <p>Somos una empresa líder en el mercado inmobiliario rural de Limache, Región de Valparaíso. Con más de 15 años de experiencia, ofrecemos las mejores oportunidades de inversión en propiedades rurales, garantizando seguridad y rentabilidad para nuestros clientes.</p>
+            <p>Somos líderes en el mercado inmobiliario rural de Limache, Región de Valparaíso. Con más de 15 años de experiencia, ofrecemos las mejores oportunidades de inversión en propiedades rurales, garantizando seguridad y rentabilidad para nuestros clientes.</p>
         </section>
 
         <section id="contact">
@@ -48,9 +51,28 @@
         </section>
     </div>
 
+    <div id="zoom-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Agendar una reunión por Zoom</h2>
+            <form id="zoom-form">
+                <input type="text" id="fullName" placeholder="Nombre completo" required>
+                <input type="email" id="zoomEmail" placeholder="Correo electrónico" required>
+                <input type="tel" id="zoomPhone" placeholder="Teléfono" required>
+                <div id="captcha-container"></div>
+                <input type="text" id="captcha-input" placeholder="Ingrese el código captcha" required>
+                <button type="submit" class="submit-button">Agendar reunión</button>
+            </form>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2023 Propiedades Rurales en Limache. Todos los derechos reservados.</p>
     </footer>
+
+    <a href="https://wa.me/56912345678" class="whatsapp-button" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
 
     <script src="script.js"></script>
 </body>

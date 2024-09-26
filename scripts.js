@@ -23,8 +23,19 @@ function loadProperties() {
     });
 }
 
-// Handle form submission
-function handleFormSubmission(e) {
+// Generate a random captcha code
+function generateCaptcha() {
+    return Math.random().toString(36).substr(2, 6).toUpperCase();
+}
+
+// Display the captcha
+function displayCaptcha() {
+    const captchaContainer = document.getElementById('captcha-container');
+    captchaContainer.textContent = generateCaptcha();
+}
+
+// Handle contact form submission
+function handleContactFormSubmission(e) {
     e.preventDefault();
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
@@ -32,14 +43,72 @@ function handleFormSubmission(e) {
     const message = document.getElementById('message').value;
     
     // Here you would typically send this data to a server
-    console.log("Form submitted:", { name, email, phone, message });
+    console.log("Contact form submitted:", { name, email, phone, message });
     alert("Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.");
     e.target.reset();
+}
+
+// Handle Zoom meeting booking
+function handleZoomBooking(e) {
+    e.preventDefault();
+    const fullName = document.getElementById('fullName').value;
+    const email = document.getElementById('zoomEmail').value;
+    const phone = document.getElementById('zoomPhone').value;
+    const captchaInput = document.getElementById('captcha-input').value;
+    const captchaContainer = document.getElementById('captcha-container');
+
+    if (captchaInput.toUpperCase() === captchaContainer.textContent) {
+        console.log("Zoom meeting booked:", { fullName, email, phone });
+        alert(`Gracias, ${fullName}. Tu reunión por Zoom ha sido agendada. Te enviaremos los detalles por correo electrónico.`);
+        modal.style.opacity = "0";
+        setTimeout(() => {
+            modal.style.display = "none";
+        }, 300);
+        zoomForm.reset();
+        displayCaptcha();
+    } else {
+        alert("El código captcha es incorrecto. Por favor, inténtalo de nuevo.");
+        displayCaptcha();
+    }
+}
+
+// Modal functionality
+const modal = document.getElementById("zoom-modal");
+const btn = document.getElementById("open-zoom-modal");
+const heroCta = document.getElementById("hero-cta");
+const span = document.getElementsByClassName("close")[0];
+const zoomForm = document.getElementById("zoom-form");
+const contactForm = document.getElementById("contact-form");
+
+function openModal() {
+    modal.style.display = "block";
+    setTimeout(() => {
+        modal.style.opacity = "1";
+    }, 10);
+    displayCaptcha();
+}
+
+function closeModal() {
+    modal.style.opacity = "0";
+    setTimeout(() => {
+        modal.style.display = "none";
+    }, 300);
+}
+
+btn.onclick = openModal;
+heroCta.onclick = openModal;
+
+span.onclick = closeModal;
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        closeModal();
+    }
 }
 
 // Initialize the page
 document.addEventListener('DOMContentLoaded', function() {
     loadProperties();
-    const contactForm = document.getElementById('contact-form');
-    contactForm.addEventListener('submit', handleFormSubmission);
+    zoomForm.addEventListener('submit', handleZoomBooking);
+    contactForm.addEventListener('submit', handleContactFormSubmission);
 });
